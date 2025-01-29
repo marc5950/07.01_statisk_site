@@ -21,6 +21,7 @@ video {
 	--white: rgb(255, 255, 255);
 	scroll-behavior: smooth;
 	background-color: var(--bgcolor);
+	font-family: inter;
 }
 
 main {
@@ -35,14 +36,12 @@ a {
 	color: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+p,
 a,
-p {
-	font-family: inter;
+ul,
+button {
+	font-size: clamp(1.2rem, 1.1769rem + 0.1026vw, 1.25rem);
+	cursor: pointer;
 }
 
 h1,
@@ -74,12 +73,6 @@ h4 {
 }
 h5 {
 	font-size: clamp(1.6rem, 1.5308rem + 0.3077vw, 1.75rem);
-}
-p,
-a,
-ul {
-	font-size: clamp(1.2rem, 1.1769rem + 0.1026vw, 1.25rem);
-	cursor: pointer;
 }
 
 /* Header */
@@ -140,7 +133,7 @@ header {
 	background-color: var(--bgcolor);
 	border-radius: 30px;
 	transition: 0.4s ease;
-	border: 6px solid;
+	border: 4px solid;
 	align-items: center;
 	display: grid;
 }
@@ -157,7 +150,8 @@ header {
 .produktliste {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-	gap: 4rem 2rem;
+	grid-auto-rows: min-content;
+	gap: 2rem;
 	h3 {
 		font-size: clamp(1.2rem, 1rem + 0.3077vw, 1.75rem);
 		padding-bottom: 7px;
@@ -166,14 +160,26 @@ header {
 
 .produktkort {
 	display: grid;
-
-	color: var(--secondary);
-}
-.produktdesc {
-	display: grid;
 	grid-template-rows: subgrid;
-	grid-row: span 3;
+	grid-row: span 5; /* Sørger for, at kortene har ens højde */
+	position: relative;
 	color: var(--secondary);
+	gap: 0;
+	a {
+		color: var(--primary);
+	}
+	img {
+		position: relative;
+		z-index: 10;
+		transition: 0.4s ease;
+	}
+}
+
+.normal:not(.soldOut),
+.onSale:not(.soldOut) {
+	img:hover {
+		scale: 1.1;
+	}
 }
 
 .sale {
@@ -194,10 +200,95 @@ header {
 	color: var(--secondary);
 	padding: 1rem;
 	border-radius: 0px 00px 10px 0px;
-	z-index: 10;
+	z-index: 100;
 }
+
 .soldOut {
 	img {
 		opacity: 0.5;
 	}
+}
+
+/* Produkt */
+.size-picker {
+	cursor: default;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+	gap: 10px;
+	margin-top: 0px;
+}
+.size-btn {
+	color: var(--secondary);
+	background-color: var(--bgcolor);
+	border-radius: 10px;
+	transition: 0.4s ease;
+	border: 4px solid;
+	padding: 0.5rem;
+}
+
+.size-btn.selected {
+	scale: 1.1;
+	background-color: var(--secondary);
+	color: var(--primary);
+}
+
+.kurv {
+	margin-top: 5px;
+	color: var(--secondary);
+	background-color: var(--bgcolor);
+	border-radius: 10px;
+	transition: 0.3s ease;
+	border: 4px solid;
+	padding: 0.5rem;
+	width: max-content;
+}
+.kurv:hover,
+.size-btn:hover {
+	scale: 1.05;
+	background-color: var(--secondary);
+	color: var(--primary);
+	border: 6px solid var(--secondary);
+}
+
+.produktinfo {
+	display: grid;
+	gap: 20px;
+	h3 {
+		margin-bottom: 5px;
+	}
+}
+
+.produktdesc {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.produktdesc1 {
+	display: grid;
+	gap: 5px;
+	:first-child {
+		font-weight: 800;
+	}
+}
+
+@media (min-width: 900px) {
+	.produktinfo {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 50px;
+	}
+}
+
+.produktdescgreen {
+	color: var(--tertiary);
+}
+
+.produktdesccta {
+	display: grid;
+	gap: 6px;
+}
+
+.bold {
+	font-weight: bold;
 }
