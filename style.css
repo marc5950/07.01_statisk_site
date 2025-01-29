@@ -156,10 +156,11 @@ header {
 
 .produktliste {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-	gap: 2rem 4rem;
+	grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+	gap: 4rem 2rem;
 	h3 {
-		font-size: clamp(1.6rem, 1.5308rem + 0.3077vw, 1.75rem);
+		font-size: clamp(1.2rem, 1rem + 0.3077vw, 1.75rem);
+		padding-bottom: 7px;
 	}
 }
 
