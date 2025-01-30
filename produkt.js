@@ -35,4 +35,16 @@ fetch(`https://kea-alt-del.dk/t7/api/products/${produktId}`)
           <p>${data.description}</p>
         </div>
       </div>`;
+    sizeButtonListeners();
   });
+
+function sizeButtonListeners() {
+  const buttons = document.querySelectorAll(".size-btn");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      buttons.forEach((btn) => btn.classList.remove("selected"));
+      button.classList.add("selected");
+      console.log("Valgt størrelse:", button.dataset.size);
+    });
+  });
+}
