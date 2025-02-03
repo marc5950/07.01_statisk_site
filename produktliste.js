@@ -6,6 +6,8 @@ const kategori = urlParams.get("kategori");
 
 console.log("kategori;", kategori);
 
+document.querySelector(".produkter").innerHTML = `<h2>${kategori}</h2> <section class="produktliste"></section>`;
+
 let produktDesc = document.querySelector(".produktliste");
 fetch(`https://kea-alt-del.dk/t7/api/products?limit=100&category=${kategori}`)
   .then((response) => response.json())
