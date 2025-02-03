@@ -1,5 +1,13 @@
+const queryString = window.location.search;
+
+const urlParams = new URLSearchParams(queryString);
+
+const kategori = urlParams.get("kategori");
+
+console.log("kategori;", kategori);
+
 let produktDesc = document.querySelector(".produktliste");
-fetch(`https://kea-alt-del.dk/t7/api/products/`)
+fetch(`https://kea-alt-del.dk/t7/api/products?limit=100&category=${kategori}`)
   .then((response) => response.json())
   .then((data) => showData(data));
 
@@ -20,7 +28,7 @@ function showData(produkter) {
 
       return `
 	  <article class="produktkort ${produktSale} ${productSoldOut}">
-		<a href="produkt.html">
+		<a href="produkt.html?produktId=${produkt.id}">
 		  <img src="https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp" alt="Produktfoto" />
 		</a>
 		<p>
