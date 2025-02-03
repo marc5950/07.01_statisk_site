@@ -2,7 +2,7 @@ const queryString = window.location.search;
 
 const urlParams = new URLSearchParams(queryString);
 
-const menu = urlParams.get("menu");
+const menu = urlParams.get("menu") || "Categories";
 
 console.log("menu;", menu);
 
@@ -20,6 +20,8 @@ function menukat(menu) {
     return "subcategory";
   } else if (menu === "Seasons") {
     return "season";
+  } else {
+    return "category"; // Hvis ingen match findes
   }
 }
 
