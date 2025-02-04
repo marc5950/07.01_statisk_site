@@ -7,9 +7,9 @@ const produktId = urlParams.get("produktId");
 console.log("produktId;", produktId);
 let produktDesc = document.querySelector(".produktinfo");
 fetch(`https://kea-alt-del.dk/t7/api/products/${produktId}`)
-  .then((response) => response.json())
-  .then((data) => {
-    produktDesc.innerHTML = `
+	.then((response) => response.json())
+	.then((data) => {
+		produktDesc.innerHTML = `
    <img src="https://kea-alt-del.dk/t7/images/webp/640/${produktId}.webp" alt="Produktfoto" />
       <div class="produktdesc">
         <div>
@@ -41,16 +41,16 @@ fetch(`https://kea-alt-del.dk/t7/api/products/${produktId}`)
           <p>${data.description}</p>
         </div>
       </div>`;
-    sizeButtonListeners();
-  });
+		sizeButtonListeners();
+	});
 
 function sizeButtonListeners() {
-  const buttons = document.querySelectorAll(".size-btn");
-  buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-      buttons.forEach((btn) => btn.classList.remove("selected"));
-      button.classList.add("selected");
-      console.log("Valgt størrelse:", button.dataset.size);
-    });
-  });
+	const buttons = document.querySelectorAll(".size-btn");
+	buttons.forEach((button) => {
+		button.addEventListener("click", () => {
+			buttons.forEach((btn) => btn.classList.remove("selected"));
+			button.classList.add("selected");
+			console.log("Valgt størrelse:", button.dataset.size);
+		});
+	});
 }
