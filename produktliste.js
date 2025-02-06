@@ -21,11 +21,33 @@ function prodkat(menu) {
 	}
 }
 
+// Funktion til at filtrere efter køn
+function showFiltered() {
+	document.querySelectorAll(".gender-btn").forEach((knap) =>
+		knap.addEventListener("click", function () {
+			// Brug function() i stedet for =>
+			const filter = this.dataset.gender;
+			if (filter === "All") {
+				showData(allData);
+			} else {
+				fraction = allData.filter((product) => product.gender === filter);
+				showData(fraction);
+			}
+		})
+	);
+}
+
+let allData;
+
 let produktDesc = document.querySelector(".produktliste");
 const prodKat = prodkat(menu);
 fetch(`https://kea-alt-del.dk/t7/api/products?limit=100&${[prodKat]}=${kategori}`)
 	.then((response) => response.json())
-	.then((data) => showData(data));
+	.then((json) => {
+		allData = json;
+		showData(allData);
+		showFiltered();
+	});
 function showData(produkter) {
 	console.log(produkter);
 
@@ -62,8 +84,20 @@ function showData(produkter) {
 		</div>
 		<a href="produkt.html">Read more</a>
 	  </article>
-	`;
+	  `;
 		})
 		.join(``);
+	sizeButtonListeners();
 	produktDesc.innerHTML = markup;
+}
+
+function sizeButtonListeners() {
+	const buttons = document.querySelectorAll(".gender-btn");
+	buttons.forEach((button) => {
+		button.addEventListener("click", () => {
+			buttons.forEach((btn) => btn.classList.remove("selected"));
+			button.classList.add("selected");
+			console.log("Valgt køn:", button.dataset.gender);
+		});
+	});
 }
